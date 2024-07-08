@@ -1,33 +1,50 @@
 # SystemD OTEP Reciever
 
 ### Added
-Metrics for capturing SystemD service metrics including current state.
+Metrics for capturing SystemD service metrics including current state using existing [dbus](https://pkg.go.dev/github.com/coreos/go-systemd/v22@v22.5.0/dbus) libraries
 
 ## Motivation
 
-Be able to display current service availability on a Grafana Dashboard as well as available metrics from SystemD
+Be able to display current service availability on a Grafana Dashboard as well as available metrics from SystemD including metrics including the following for each requested service name.
+
+1. service.activestate
+2. service.loadstate
+3. service.loadstate.activing
+4. service.loadstate.activated
+5. service.loadstate.deactivating
+6. service.loadstate.deactivated
+7. service.loadstate.runduration
 
 ## Explanation
 
-Explain the proposed change as though it was already implemented and you were explaining it to a user. Depending on which layer the proposal addresses, the "user" may vary, or there may even be multiple.
+<!-- Explain the proposed change as though it was already implemented and you were explaining it to a user. Depending on which layer the proposal addresses, the "user" may vary, or there may even be multiple.
 
-We encourage you to use examples, diagrams, or whatever else makes the most sense!
+We encourage you to use examples, diagrams, or whatever else makes the most sense! -->
+
+System administrators and developers need to monitor the health and performance of their systems. Systemd metrics provide critical information about the system's state and the services running on it. By using a systemd receiver to collect this data, it can be visualized in dashboards to provide valuable insights, such as:
+
+Service uptime and performance
+System boot and shutdown times
+Resource usage by services
+Failure patterns and anomalies
 
 ## Internal details
 
-From a technical perspective, how do you propose accomplishing the proposal? In particular, please explain:
+<!-- From a technical perspective, how do you propose accomplishing the proposal? In particular, please explain:
 
 * How the change would impact and interact with existing functionality
 * Likely error modes (and how to handle them)
-* Corner cases (and how to handle them)
+* Corner cases (and how to handle them) -->
 
-While you do not need to prescribe a particular implementation - indeed, OTEPs should be about **behaviour**, not implementation! - it may be useful to provide at least one suggestion as to how the proposal *could* be implemented. This helps reassure reviewers that implementation is at least possible, and often helps them inspire them to think more deeply about trade-offs, alternatives, etc.
+By using the [dbus](https://pkg.go.dev/github.com/coreos/go-systemd/v22@v22.5.0/dbus) libraries and converting those to opentelemetry metric functionality we can then display these onto dashboards.
+
+<!-- While you do not need to prescribe a particular implementation - indeed, OTEPs should be about **behaviour**, not implementation! - it may be useful to provide at least one suggestion as to how the proposal *could* be implemented. This helps reassure reviewers that implementation is at least possible, and often helps them inspire them to think more deeply about trade-offs, alternatives, etc. -->
 
 ## Trade-offs and mitigations
 
-What are some (known!) drawbacks? What are some ways that they might be mitigated?
+<!-- What are some (known!) drawbacks? What are some ways that they might be mitigated?
 
-Note that mitigations do not need to be complete *solutions*, and that they do not need to be accomplished directly through your proposal. A suggested mitigation may even warrant its own OTEP!
+Note that mitigations do not need to be complete *solutions*, and that they do not need to be accomplished directly through your proposal. A suggested mitigation may even warrant its own OTEP! -->
 
 ## Prior art and alternatives
 
